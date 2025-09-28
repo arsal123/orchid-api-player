@@ -1,6 +1,6 @@
-import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
+import { setupZonelessTestEnv } from 'jest-preset-angular/setup-env/zoneless';
 
-setupZoneTestEnv();
+setupZonelessTestEnv();
 
 // Add any global test setup here
 Object.defineProperty(window, 'CSS', { value: null });
@@ -25,11 +25,4 @@ Object.defineProperty(document.body.style, 'transform', {
   }
 });
 
-// Mock global timer functions for Jest environment
-global.setInterval = jest.fn().mockImplementation((callback, delay) => {
-  return setTimeout(callback, delay);
-});
-
-global.clearInterval = jest.fn().mockImplementation((id) => {
-  clearTimeout(id);
-});
+// Zoneless testing environment - no need for manual timer mocks
