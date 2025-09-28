@@ -36,8 +36,7 @@ export class CameraItemComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.refreshInterval){
       clearInterval(this.refreshInterval);
-    }
-    
+    }    
   }
 
   private updateImageUrl() {
