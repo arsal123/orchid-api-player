@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { CameraItemComponent } from './camera-item.component';
+import { CameraFrameComponent } from './camera-frame.component';
 import { CameraService } from '../../services/camera.service';
 import { SingleStream } from '../../models/streams.model';
 import { provideZonelessChangeDetection } from '@angular/core';
 
-describe('CameraItemComponent', () => {
-  let component: CameraItemComponent;
+describe('CameraFrameComponent', () => {
+  let component: CameraFrameComponent;
   let fixture: any;
   let cameraService: jest.Mocked<CameraService>;
 
@@ -20,14 +20,14 @@ describe('CameraItemComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [CameraItemComponent],
+      imports: [CameraFrameComponent],
       providers: [
         provideZonelessChangeDetection(),
         { provide: CameraService, useValue: cameraServiceMock }
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CameraItemComponent);
+    fixture = TestBed.createComponent(CameraFrameComponent);
     component = fixture.componentInstance;
     cameraService = TestBed.inject(CameraService) as jest.Mocked<CameraService>;
     

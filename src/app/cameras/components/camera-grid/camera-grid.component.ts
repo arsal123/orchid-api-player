@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { CameraService } from '../../services/camera.service';
-import { CameraItemComponent } from '../camera-item/camera-item.component';
+import { CameraFrameComponent } from '../camera-frame/camera-frame.component';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { SingleStream, StreamsResponse } from '../../models/streams.model';
@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './camera-grid.component.html',
   styleUrls: ['./camera-grid.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CameraItemComponent],
+  imports: [CameraFrameComponent],
 })
 export class CameraGridComponent implements OnInit {
   private cameraService = inject(CameraService);
