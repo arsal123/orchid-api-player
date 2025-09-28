@@ -1,9 +1,26 @@
 <div class="camera-item">
   <h3>{{ inputStream().name }}</h3>
-  <img
-    [ngSrc]="imageUrl()"
-    alt="No image available for this stream"
-    width="400"
-    height="400"
-  />
+  <div class="image-container">
+    @if (isImageLoading()) {
+      <div class="image-loading">
+        <div class="loading-spinner">⏳</div>
+        <p>Loading image...</p>
+      </div>
+    }
+    @if (hasImageError()) {
+      <div class="image-error">
+        <div class="error-icon">📷</div>
+        <p>Image unavailable</p>
+      </div>
+    }
+    <img
+      [ngSrc]="imageUrl()"
+      alt="Camera feed for {{ inputStream().name }}"
+      width="400"
+      height="400"
+      (load)="onImageLoad()"
+      (error)="onImageError()"
+      [class.hidden]="isImageLoading() || hasImageError()"
+    />
+  </div>
 </div>

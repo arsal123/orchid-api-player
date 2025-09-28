@@ -9,7 +9,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [ReactiveFormsModule],
 })
 export class LoginComponent {
@@ -18,6 +17,7 @@ export class LoginComponent {
   private router = inject(Router);
   private destroyRef = takeUntilDestroyed(); 
   loginError = signal<boolean | string>(false);
+  isLoading = signal(false);
 
   form = this.fb.group({
     user: ['', [Validators.required]],
@@ -26,16 +26,19 @@ export class LoginComponent {
 
   login() {
     if (this.form.valid) {
+      this.isLoading.set(true);
       this.loginError.set(false);
       const { user, pass } = this.form.getRawValue();
       this.authService.login({ user: user!, pass: pass! })
         .pipe(this.destroyRef)
         .subscribe({
           next: () => {
+            this.isLoading.set(false);
             this.loginError.set(false);
             this.router.navigate(['/cameras']);
           },
           error: (err: any) => {
+            this.isLoading.set(false);
             if (err.error.reason && typeof err.error.reason === 'string') {
               this.loginError.set(err.error.reason);
             } else {

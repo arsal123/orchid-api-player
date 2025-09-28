@@ -34,9 +34,14 @@
       <button 
         type="submit" 
         class="login-btn" 
-        [disabled]="form.invalid">
-        <span class="login-icon">➤</span>
-        Sign In
+        [disabled]="form.invalid || isLoading()">
+        @if (isLoading()) {
+          <span class="loading-spinner">⏳</span>
+          Signing In...
+        } @else {
+          <span class="login-icon">➤</span>
+          Sign In
+        }
       </button>
     </form>
     @if (loginError()) {

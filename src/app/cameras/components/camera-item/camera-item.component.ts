@@ -24,6 +24,8 @@ export class CameraItemComponent implements OnInit, OnDestroy {
   private cameraService = inject(CameraService);
   private refreshInterval: number | null = null;
   imageUrl = signal<string>('');
+  isImageLoading = signal(true);
+  hasImageError = signal(false);
 
   ngOnInit() {
     console.log('CameraItemComponent initialized with stream:', this.inputStream());
@@ -43,7 +45,19 @@ export class CameraItemComponent implements OnInit, OnDestroy {
     const timestamp = new Date().getTime();
     // console.log('Stream ID:', this.inputStream().id);
     const imageUrl = this.cameraService.getCameraFrameUrl(this.inputStream().id);
-
+    
+    this.isImageLoading.set(true);
+    this.hasImageError.set(false);
     this.imageUrl.set(`${imageUrl}&t=${timestamp}`);
+  }
+
+  onImageLoad() {
+    this.isImageLoading.set(false);
+    this.hasImageError.set(false);
+  }
+
+  onImageError() {
+    this.isImageLoading.set(false);
+    this.hasImageError.set(true);
   }
 }

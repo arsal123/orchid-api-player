@@ -1,4 +1,13 @@
 
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .error-message {
   color: #ffffff;
   background: rgba(255, 87, 87, 0.15);

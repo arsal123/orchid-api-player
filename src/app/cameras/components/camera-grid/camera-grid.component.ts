@@ -12,7 +12,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './camera-grid.component.html',
   styleUrls: ['./camera-grid.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CameraItemComponent],
 })
 export class CameraGridComponent implements OnInit {
@@ -20,17 +19,26 @@ export class CameraGridComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private destroyRef = takeUntilDestroyed()
-  streams = signal<SingleStream[]>([])
+  streams = signal<SingleStream[]>([]);
+  isLoading = signal(true);
+  hasError = signal(false);
 
   ngOnInit() {
+    this.isLoading.set(true);
+    this.hasError.set(false);
     this.cameraService.getStreams().pipe(this.destroyRef).subscribe({
       next: (response) => {
         const typedResponse = response as StreamsResponse;
+        this.isLoading.set(false);
         if (typedResponse.streams){
           this.streams.set(typedResponse.streams);
         }
       },
-      error: () => this.streams.set([])
+      error: () => {
+        this.isLoading.set(false);
+        this.hasError.set(true);
+        this.streams.set([]);
+      }
     });
   }
 
