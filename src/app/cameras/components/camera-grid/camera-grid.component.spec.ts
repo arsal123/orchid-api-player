@@ -1,10 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 import { of, throwError } from 'rxjs';
 import { CameraGridComponent } from './camera-grid.component';
 import { CameraService } from '../../services/camera.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { CameraFrameComponent } from '../camera-frame/camera-frame.component';
 
 describe('CameraGridComponent', () => {
   let component: CameraGridComponent;
@@ -15,7 +17,8 @@ describe('CameraGridComponent', () => {
 
   beforeEach(async () => {
     const cameraServiceMock = {
-      getStreams: jest.fn()
+      getStreams: jest.fn().mockReturnValue(of({ streams: [] })),
+      getCameraFrameUrl: jest.fn().mockReturnValue('http://mock-url.com/frame.jpg')
     };
 
     const authServiceMock = {
@@ -100,4 +103,18 @@ describe('CameraGridComponent', () => {
     expect(authService.logout).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/login']);
   });
+
+  it('should pass the id to child component', () => {
+    const mockStreams = [
+      { id: 1, name: 'Camera 1' },
+      { id: 2, name: 'Camera 2' }
+    ];
+    cameraService.getStreams.mockReturnValue(of({ streams: mockStreams }));
+    fixture.detectChanges();
+    const cameraFrames = fixture.debugElement.queryAll(By.directive(CameraFrameComponent)).map((de: {componentInstance: CameraFrameComponent}) => de.componentInstance as CameraFrameComponent);
+    for (let i = 0; i < cameraFrames.length; i++) {
+      expect(cameraFrames[i].inputStream().id).toBe(mockStreams[i].id);
+    }
+
+  })
 });

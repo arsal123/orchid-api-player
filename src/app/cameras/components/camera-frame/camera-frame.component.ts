@@ -13,13 +13,13 @@ import { SingleStream } from '../../models/streams.model';
 import { CameraService } from '../../services/camera.service';
 
 @Component({
-  selector: 'app-camera-item',
-  templateUrl: './camera-item.component.html',
-  styleUrls: ['./camera-item.component.css'],
+  selector: 'app-camera-frame',
+  templateUrl: './camera-frame.component.html',
+  styleUrls: ['./camera-frame.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgOptimizedImage],
 })
-export class CameraItemComponent implements OnInit, OnDestroy {
+export class CameraFrameComponent implements OnInit, OnDestroy {
   inputStream = input.required<SingleStream>();
   private cameraService = inject(CameraService);
   private refreshInterval: number | null = null;
@@ -28,7 +28,7 @@ export class CameraItemComponent implements OnInit, OnDestroy {
   hasImageError = signal(false);
 
   ngOnInit() {
-    console.log('CameraItemComponent initialized with stream:', this.inputStream());
+    console.log('CameraFrameComponent initialized with stream:', this.inputStream());
     this.updateImageUrl();
     this.refreshInterval = setInterval(() => this.updateImageUrl(), 5000);
   }

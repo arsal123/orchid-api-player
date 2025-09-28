@@ -26,7 +26,7 @@
       <p class="no-streams-message">No camera streams available</p>
     } @else {
       @for (stream of streams(); track stream.id) {
-        <app-camera-item [inputStream]="stream" />
+        <app-camera-frame [inputStream]="stream" />
       }
     }
   </div>
