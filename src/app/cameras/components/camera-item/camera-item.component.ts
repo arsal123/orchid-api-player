@@ -46,7 +46,7 @@ export class CameraItemComponent implements OnInit, OnDestroy {
     // console.log('Stream ID:', this.inputStream().id);
     const imageUrl = this.cameraService.getCameraFrameUrl(this.inputStream().id);
     
-    this.isImageLoading.set(true);
+    // this.isImageLoading.set(true);
     this.hasImageError.set(false);
     this.imageUrl.set(`${imageUrl}&t=${timestamp}`);
   }
