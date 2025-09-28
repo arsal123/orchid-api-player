@@ -1,0 +1,24 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1 class="main-heading">Orchid API Player</h1>
+    <div class="sub-text-container">
+      <p class="sub-text">
+        <span class="refresh-icon">🔄</span>
+        Camera frames refreshing every 5 seconds
+      </p>
+      <button id="logout-btn" class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+
+  </header>
+
+  <div class="camera-grid">
+       @if(streams().length === 0) {
+         <p class="no-streams-message">Streams Unavailable</p>
+       } @else {
+         @for (stream of streams(); track stream.id) {
+           <app-camera-item [inputStream]="stream" />
+         }
+       }
+  </div>
+  
+</div>
