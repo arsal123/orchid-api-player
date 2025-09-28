@@ -15,7 +15,7 @@ describe('CameraGridComponent', () => {
 
   beforeEach(async () => {
     const cameraServiceMock = {
-      getStreams: jest.fn()
+      getStreams: jest.fn().mockReturnValue(of({ streams: [] }))
     };
 
     const authServiceMock = {
@@ -100,4 +100,14 @@ describe('CameraGridComponent', () => {
     expect(authService.logout).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/login']);
   });
+
+  it('should pass the id to child component', () => {
+    const mockStreams = [
+      { id: 1, name: 'Camera 1' },
+      { id: 2, name: 'Camera 2' }
+    ];
+    cameraService.getStreams.mockReturnValue(of({ streams: mockStreams }));
+    fixture.detectChanges();
+    const camera
+  })
 });

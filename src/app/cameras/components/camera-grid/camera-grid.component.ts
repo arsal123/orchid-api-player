@@ -18,7 +18,7 @@ export class CameraGridComponent implements OnInit {
   private cameraService = inject(CameraService);
   private authService = inject(AuthService);
   private router = inject(Router);
-  private destroyRef = takeUntilDestroyed()
+  private destroyRef = takeUntilDestroyed();
   streams = signal<SingleStream[]>([]);
   isLoading = signal(true);
   hasError = signal(false);
