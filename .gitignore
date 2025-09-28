@@ -21,6 +21,7 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 tmp/
+TESTING_MIGRATION.md
 
 # Visual Studio Code
 .vscode/*
