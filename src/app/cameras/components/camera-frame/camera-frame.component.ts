@@ -15,7 +15,7 @@ import { CameraService } from '../../services/camera.service';
 @Component({
   selector: 'app-camera-frame',
   templateUrl: './camera-frame.component.html',
-  styleUrls: ['./camera-frame.component.css'],
+  styleUrls: ['./camera-frame.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgOptimizedImage],
 })

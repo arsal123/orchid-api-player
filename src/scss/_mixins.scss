@@ -1,0 +1,204 @@
+// Flexbox mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  @include flex-column;
+  align-items: center;
+}
+
+// Responsive mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: #{$mobile - 1px}) { @content; }
+  }
+  @if $breakpoint == tablet {
+    @media (min-width: #{$mobile}) and (max-width: #{$tablet - 1px}) { @content; }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: #{$tablet}) and (max-width: #{$desktop - 1px}) { @content; }
+  }
+  @if $breakpoint == large-desktop {
+    @media (min-width: #{$desktop}) { @content; }
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: #{$mobile - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin large-desktop-up {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+// Button mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-medium;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  border-radius: $border-radius;
+  transition: all 0.15s ease-in-out;
+  text-decoration: none;
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-variant($bg-color, $border-color: $bg-color, $hover-bg: darken($bg-color, 7.5%), $hover-border: darken($border-color, 10%), $active-bg: darken($bg-color, 10%), $active-border: darken($border-color, 12.5%)) {
+  color: color-contrast($bg-color);
+  background-color: $bg-color;
+  border-color: $border-color;
+
+  &:hover {
+    color: color-contrast($hover-bg);
+    background-color: $hover-bg;
+    border-color: $hover-border;
+  }
+
+  &:focus,
+  &.focus {
+    color: color-contrast($hover-bg);
+    background-color: $hover-bg;
+    border-color: $hover-border;
+    box-shadow: 0 0 0 0.2rem rgba($border-color, 0.5);
+  }
+
+  &:active,
+  &.active {
+    color: color-contrast($active-bg);
+    background-color: $active-bg;
+    border-color: $active-border;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba($border-color, 0.5);
+    }
+  }
+}
+
+// Typography mixins
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-break {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+// Animation mixins
+@mixin transition($property: all, $duration: 0.3s, $easing: ease) {
+  transition: $property $duration $easing;
+}
+
+@mixin fade-in($duration: 0.3s) {
+  animation: fadeIn $duration ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin slide-in-up($duration: 0.3s) {
+  animation: slideInUp $duration ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Loading spinner mixin
+@mixin spinner($size: 1rem, $border-width: 2px, $color: $primary) {
+  display: inline-block;
+  width: $size;
+  height: $size;
+  border: $border-width solid rgba($color, 0.3);
+  border-radius: 50%;
+  border-top-color: $color;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Card mixin
+@mixin card($padding: $spacing-lg, $bg: $white, $border: 1px solid rgba($black, 0.125), $border-radius: $border-radius-md) {
+  background-color: $bg;
+  border: $border;
+  border-radius: $border-radius;
+  padding: $padding;
+  box-shadow: $shadow;
+}
+
+// Glassmorphism effect
+@mixin glass($bg-opacity: 0.1, $blur: 10px, $border-opacity: 0.2) {
+  background: rgba($white, $bg-opacity);
+  backdrop-filter: blur($blur);
+  border: 1px solid rgba($white, $border-opacity);
+}
+
+// Utility function for color contrast (simplified)
+@function color-contrast($background) {
+  @return if(lightness($background) > 50%, $black, $white);
+}

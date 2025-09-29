@@ -1,8 +1,12 @@
+// Import shared variables and mixins
+@use '../../../../scss/variables' as *;
+@use '../../../../scss/mixins' as *;
+
 .page-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: $spacing-xl;
+  font-family: $font-family-sans;
 }
 
 .loading-container,

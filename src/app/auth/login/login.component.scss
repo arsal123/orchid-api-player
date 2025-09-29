@@ -1,6 +1,10 @@
 
+// Import shared variables and mixins
+@use '../../../scss/variables' as *;
+@use '../../../scss/mixins' as *;
+
 .loading-spinner {
-  animation: spin 1s linear infinite;
+  @include spinner(1.5rem, 3px, $white);
 }
 
 @keyframes spin {
@@ -9,38 +13,38 @@
 }
 
 .error-message {
-  color: #ffffff;
-  background: rgba(255, 87, 87, 0.15);
+  color: $white;
+  background: $error-bg;
   backdrop-filter: blur(8px);
-  border: 2px solid rgba(255, 87, 87, 0.4);
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  margin-top: 1.5rem;
+  border: 2px solid $error-border;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-xl;
+  margin-top: $spacing-lg;
   text-align: center;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 16px rgba(255, 87, 87, 0.2);
-  animation: errorSlideIn 0.3s ease-out;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+  text-shadow: 0 1px 2px rgba($black, 0.3);
+  box-shadow: 0 4px 16px rgba($error-color, 0.2);
+  @include slide-in-up(0.3s);
   position: relative;
   overflow: hidden;
-}
 
-.error-message::before {
-  content: '⚠️';
-  margin-right: 0.5rem;
-  font-size: 1em;
-}
+  &::before {
+    content: '⚠️';
+    margin-right: 0.5rem;
+    font-size: 1em;
+  }
 
-.error-message::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  animation: shimmer 2s infinite;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($white, 0.1), transparent);
+    animation: shimmer 2s infinite;
+  }
 }
 
 @keyframes errorSlideIn {
