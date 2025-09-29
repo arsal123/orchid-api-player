@@ -24,9 +24,7 @@
 
 .image-error {
   @include loading-common;
-  color: #666;
-  margin: 0;
-  font-size: 0.9rem;
+  @include loading-p;
 }
 
 .error-icon {
