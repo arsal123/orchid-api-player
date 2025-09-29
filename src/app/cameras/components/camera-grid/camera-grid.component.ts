@@ -26,7 +26,7 @@ export class CameraGridComponent implements OnInit {
   ngOnInit() {
     this.isLoading.set(true);
     this.hasError.set(false);
-    this.cameraService.getStreams().pipe(this.destroyRef).subscribe({
+    this.cameraService.getStreams().subscribe({
       next: (response) => {
         const typedResponse = response as StreamsResponse;
         this.isLoading.set(false);

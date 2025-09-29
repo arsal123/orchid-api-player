@@ -1,6 +1,7 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class AuthService {
   private _sessionId = signal<string | null>(null);
   readonly sessionId = this._sessionId.asReadonly();
   private headers = { 'Content-Type': 'application/json' };
+  private destroyRef = inject(DestroyRef);
 
   login(credentials: { user: string; pass: string }) {
     const requestBody = {
@@ -26,7 +28,8 @@ export class AuthService {
         tap(({ id }) => {
           this._sessionId.set(id);
           console.log('Logged in with session ID:', id);
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       );
   }
 
