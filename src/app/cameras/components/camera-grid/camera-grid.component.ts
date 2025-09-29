@@ -4,7 +4,8 @@ import { CameraFrameComponent } from '../camera-frame/camera-frame.component';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { SingleStream, StreamsResponse } from '../../models/streams.model';
-import { CameraSpinner } from "../camera-spinner/camera-spinner";
+import { CameraSpinner } from '../camera-spinner/camera-spinner';
+
 @Component({
   selector: 'app-camera-grid',
   templateUrl: './camera-grid.component.html',
