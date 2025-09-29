@@ -54,6 +54,26 @@ $tablet: 768px;
   align-items: center;
 }
 
+@mixin loading-p {
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+@mixin loading-common {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248, 249, 250, 0.9);
+  z-index: 1;
+}
+
 @mixin main-heading {
   font-size: 3.5rem;
   font-weight: 700;

@@ -7,18 +7,18 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { SingleStream, StreamsResponse } from '../../models/streams.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CameraSpinner } from "../camera-spinner/camera-spinner";
 @Component({
   selector: 'app-camera-grid',
   templateUrl: './camera-grid.component.html',
   styleUrls: ['./camera-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CameraFrameComponent],
+  imports: [CameraFrameComponent, CameraSpinner],
 })
 export class CameraGridComponent implements OnInit {
   private cameraService = inject(CameraService);
   private authService = inject(AuthService);
   private router = inject(Router);
-  private destroyRef = takeUntilDestroyed();
   streams = signal<SingleStream[]>([]);
   isLoading = signal(true);
   hasError = signal(false);

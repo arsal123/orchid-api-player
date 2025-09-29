@@ -13,10 +13,7 @@
 
   <div class="camera-grid">
     @if (isLoading()) {
-      <div class="loading-container">
-        <div class="loading-spinner">⏳</div>
-        <p class="loading-message">Loading camera streams...</p>
-      </div>
+      <app-camera-spinner displayText="Loading camera streams..." />
     } @else if (hasError()) {
       <div class="error-container">
         <div class="error-icon">⚠️</div>
