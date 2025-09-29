@@ -10,7 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-camera-grid',
   templateUrl: './camera-grid.component.html',
-  styleUrls: ['./camera-grid.component.css'],
+  styleUrls: ['./camera-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CameraFrameComponent],
 })

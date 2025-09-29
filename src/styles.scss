@@ -1,0 +1,16 @@
+// Import SCSS partials
+@use 'scss/styles' as *;
+
+// Global styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-sans;
+  line-height: $line-height-normal;
+  color: $dark;
+  background-color: $light;
+}
