@@ -1,7 +1,6 @@
 
-// Import shared variables and mixins
-@use '../../../scss/variables' as *;
-@use '../../../scss/mixins' as *;
+// Import shared styles (variables and mixins)
+@use '../../../scss/styles' as *;
 
 .loading-spinner {
   @include spinner(1.5rem, 3px, $white);

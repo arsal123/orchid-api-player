@@ -1,6 +1,5 @@
-// Import shared variables and mixins
-@use '../../../../scss/variables' as *;
-@use '../../../../scss/mixins' as *;
+// Import shared styles (variables and mixins)
+@use '../../../../scss/styles' as *;
 
 .camera-frame {
   @include flex-column-center;

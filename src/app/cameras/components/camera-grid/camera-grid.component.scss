@@ -1,6 +1,5 @@
-// Import shared variables and mixins
-@use '../../../../scss/variables' as *;
-@use '../../../../scss/mixins' as *;
+// Import shared styles (variables and mixins)
+@use '../../../../scss/styles' as *;
 
 .page-container {
   min-height: 100vh;
