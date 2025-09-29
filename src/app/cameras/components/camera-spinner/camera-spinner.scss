@@ -1,0 +1,21 @@
+@use '../../../../scss/styles' as *;
+
+.image-loading {
+    @include loading-common;
+}
+
+.image-loading .loading-spinner {
+  font-size: 1.5rem;
+  animation: spin 1s linear infinite;
+  margin-bottom: 0.5rem;
+}
+
+.image-loading p {
+  @include loading-p;
+}
+
+.loading-message {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 600;
+}

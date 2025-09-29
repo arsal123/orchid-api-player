@@ -22,32 +22,12 @@
   justify-content: center;
 }
 
-.image-loading,
 .image-error {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(248, 249, 250, 0.9);
-  z-index: 1;
+  @include loading-common
 }
 
-.image-loading .loading-spinner {
-  font-size: 1.5rem;
-  animation: spin 1s linear infinite;
-  margin-bottom: 0.5rem;
-}
-
-.image-loading p,
 .image-error p {
-  color: #666;
-  margin: 0;
-  font-size: 0.9rem;
+  @include loading-p;
 }
 
 .error-icon {
@@ -63,13 +43,4 @@ img {
 img.hidden {
   opacity: 0;
   position: absolute;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

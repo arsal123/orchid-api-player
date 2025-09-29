@@ -2,10 +2,7 @@
   <h3>{{ inputStream().name }}</h3>
   <div class="image-container">
     @if (isImageLoading()) {
-      <div class="image-loading">
-        <div class="loading-spinner">⏳</div>
-        <p>Loading image...</p>
-      </div>
+      <app-camera-spinner displayText="Loading image..." />
     }
     @if (hasImageError()) {
       <div class="image-error">

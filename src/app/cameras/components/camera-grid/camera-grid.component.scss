@@ -1,6 +1,10 @@
 // Import shared styles (variables and mixins)
 @use '../../../../scss/styles' as *;
 
+// ===================================
+// LAYOUT
+// ===================================
+
 .page-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -8,36 +12,24 @@
   font-family: $font-family-sans;
 }
 
-.loading-container,
+// ===================================
+// CONTAINERS
+// ===================================
+
 .error-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include flex-column-center;
   padding: 3rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba($white, 0.1);
   backdrop-filter: blur(8px);
   border-radius: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba($white, 0.2);
   margin: 2rem auto;
   max-width: 400px;
 }
 
-.loading-spinner {
-  font-size: 2rem;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
-}
-
-.loading-message {
-  color: #fff;
-  font-size: 1.1rem;
-  margin: 0;
-}
-
 .error-container {
-  border-color: rgba(255, 87, 87, 0.4);
+  border-color: rgba($error-color, 0.4);
 }
 
 .error-icon {
@@ -46,29 +38,24 @@
 }
 
 .error-message {
-  color: #fff;
+  color: $white;
   font-size: 1.1rem;
   margin: 0;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .page-header {
   text-align: center;
   margin-bottom: 3rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba($white, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2.5rem 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba($black, 0.1);
+  border: 1px solid rgba($white, 0.2);
 }
 
 .main-heading {
-  @include main-heading
+  @include main-heading;
 }
 
 .sub-text-container {
@@ -81,23 +68,19 @@
 
 .sub-text {
   @include sub-text;
-  flex: 1;  
+  flex: 1;
 }
 
 .refresh-icon {
   display: inline-block;
-  animation: rotate 2s linear infinite;
   font-size: 1.1em;
   margin-left: 10rem;
+  animation: rotate 2s linear infinite;
 }
 
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .camera-grid {
@@ -110,77 +93,80 @@
 }
 
 .no-streams-message {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.9);
+  background: rgba($white, 0.1);
+  color: rgba($white, 0.9);
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
   font-size: 1.1rem;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba($white, 0.2);
+  box-shadow: 0 4px 16px rgba($black, 0.1);
   width: 100%;
   margin: 0;
 }
 
 .logout-btn {
   background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-  color: white;
+  color: $white;
   border: none;
   padding: 0.8rem 2rem;
   border-radius: 50px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(238, 90, 36, 0.3);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(238, 90, 36, 0.4);
+    background: linear-gradient(45deg, #ff5252, #d63031);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(238, 90, 36, 0.3);
+  }
 }
 
-.logout-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(238, 90, 36, 0.4);
-  background: linear-gradient(45deg, #ff5252, #d63031);
-}
+// ===================================
+// RESPONSIVE DESIGN
+// ===================================
 
-.logout-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(238, 90, 36, 0.3);
-}
-
-/* Responsive design */
 @media (max-width: $tablet) {
   .page-container {
-    padding: 1rem;
+    padding: $spacing-md;
   }
-  
+
+  .page-header {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+
   .main-heading {
     font-size: 2.5rem;
   }
-  
+
   .sub-text-container {
     flex-direction: column;
     gap: 1rem;
     align-items: center;
   }
-  
+
   .sub-text {
     font-size: 1rem;
     justify-content: center;
   }
-  
+
+  .camera-grid {
+    gap: 1rem;
+  }
+
   .logout-btn {
     padding: 0.6rem 1.5rem;
     font-size: 0.9rem;
-  }
-  
-  .page-header {
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-  }
-  
-  .camera-grid {
-    gap: 1rem;
   }
 }

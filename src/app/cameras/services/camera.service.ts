@@ -1,6 +1,6 @@
 import { inject, Injectable, DestroyRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
 import { API_BASE_URL } from '../../app.constants';
 import { StreamsResponse } from '../models/streams.model';
@@ -18,7 +18,9 @@ export class CameraService {
     const sessionId = this.authService.sessionId();
     return this.http
       .get<StreamsResponse>(`${API_BASE_URL}/service/streams?sid=${sessionId}&live=primary`)
-      .pipe(takeUntilDestroyed(this.destroyRef));
+      .pipe(takeUntilDestroyed(this.destroyRef)
+      , delay(2000) // Simulate network delay for testing loading states
+      );
   }
 
   getCameraFrameUrl(streamId: number): string {

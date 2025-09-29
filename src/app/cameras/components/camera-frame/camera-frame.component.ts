@@ -11,13 +11,14 @@ import {
 import { NgOptimizedImage } from '@angular/common';
 import { SingleStream } from '../../models/streams.model';
 import { CameraService } from '../../services/camera.service';
+import { CameraSpinner } from "../camera-spinner/camera-spinner";
 
 @Component({
   selector: 'app-camera-frame',
   templateUrl: './camera-frame.component.html',
   styleUrls: ['./camera-frame.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, CameraSpinner],
 })
 export class CameraFrameComponent implements OnInit, OnDestroy {
   inputStream = input.required<SingleStream>();
@@ -40,9 +41,8 @@ export class CameraFrameComponent implements OnInit, OnDestroy {
   }
 
   private updateImageUrl() {
-    // Adding a timestamp to bypass browser cache for image refresh
+    // Added a timestamp to bypass browser cache for image refresh
     const timestamp = new Date().getTime();
-    // console.log('Stream ID:', this.inputStream().id);
     const imageUrl = this.cameraService.getCameraFrameUrl(this.inputStream().id);
     
     // this.isImageLoading.set(true);
