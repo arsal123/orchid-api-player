@@ -23,11 +23,10 @@
 }
 
 .image-error {
-  @include loading-common
-}
-
-.image-error p {
-  @include loading-p;
+  @include loading-common;
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .error-icon {
