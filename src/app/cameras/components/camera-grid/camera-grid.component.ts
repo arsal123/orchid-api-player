@@ -5,6 +5,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { SingleStream, StreamsResponse } from '../../models/streams.model';
 import { CameraSpinner } from '../camera-spinner/camera-spinner';
+import { APP_NAME } from '../../../app.constants';
 
 @Component({
   selector: 'app-camera-grid',
@@ -20,6 +21,7 @@ export class CameraGridComponent implements OnInit {
   streams = signal<SingleStream[]>([]);
   isLoading = signal(true);
   hasError = signal(false);
+  APP_NAME = signal(APP_NAME).asReadonly();
 
   ngOnInit() {
     this.isLoading.set(true);

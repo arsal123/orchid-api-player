@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { APP_NAME } from '../../app.constants';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   private router = inject(Router);
   loginError = signal<boolean | string>(false);
   isLoading = signal(false);
+  APP_NAME = signal(APP_NAME).asReadonly();
 
   form = this.fb.group({
     user: ['', [Validators.required]],
