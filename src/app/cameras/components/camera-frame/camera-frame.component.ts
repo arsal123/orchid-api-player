@@ -29,7 +29,6 @@ export class CameraFrameComponent implements OnInit, OnDestroy {
   hasImageError = signal(false);
 
   ngOnInit() {
-    console.log('CameraFrameComponent initialized with stream:', this.inputStream());
     this.updateImageUrl();
     this.refreshInterval = setInterval(() => this.updateImageUrl(), 5000);
   }

@@ -27,7 +27,6 @@ export class AuthService {
       .pipe(
         tap(({ id }) => {
           this._sessionId.set(id);
-          console.log('Logged in with session ID:', id);
         }),
         takeUntilDestroyed(this.destroyRef),
         delay(2000),

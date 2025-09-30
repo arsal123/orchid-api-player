@@ -41,7 +41,6 @@ export class LoginComponent {
             } else {
               this.loginError.set('Invalid username or password');
             }
-            console.log('Error in login:', err);
           },
         });
     }
