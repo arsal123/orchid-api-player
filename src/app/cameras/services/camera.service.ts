@@ -19,7 +19,7 @@ export class CameraService {
     return this.http
       .get<StreamsResponse>(`${API_BASE_URL}/service/streams?sid=${sessionId}&live=primary`)
       .pipe(takeUntilDestroyed(this.destroyRef)
-      , delay(2000) // Simulate network delay for testing loading states
+      , delay(1000) 
       );
   }
 
