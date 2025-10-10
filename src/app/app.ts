@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { APP_NAME } from './app.constants';
 
 @Component({
   selector: 'app-root',
@@ -16,5 +17,5 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
 })
 export class App {
-  protected readonly title = signal('orchid-api-player');
+  protected readonly title = signal(APP_NAME);
 }

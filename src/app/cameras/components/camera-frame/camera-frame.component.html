@@ -1,7 +1,7 @@
 <div class="camera-frame">
   <h3>{{ inputStream().name }}</h3>
   <div class="image-container">
-    @if (isImageLoading()) {
+    @if (isLoadingSpinner()) {
       <app-camera-spinner displayText="Loading image..." />
     }
     @if (hasImageError()) {
@@ -17,7 +17,7 @@
       height="400"
       (load)="onImageLoad()"
       (error)="onImageError()"
-      [class.hidden]="isImageLoading() || hasImageError()"
+      [class.hidden]="isLoadingSpinner() || hasImageError()"
     />
   </div>
 </div>
