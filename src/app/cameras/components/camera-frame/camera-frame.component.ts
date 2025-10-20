@@ -24,13 +24,16 @@ export class CameraFrameComponent implements OnInit, OnDestroy {
   inputStream = input.required<SingleStream>();
   private cameraService = inject(CameraService);
   private refreshInterval: number | null = null;
+  private isImageLoading: boolean = false;
   imageUrl = signal<string>('');
-  isImageLoading = signal(true);
+  isLoadingSpinner = signal(true);
   hasImageError = signal(false);
 
   ngOnInit() {
     this.updateImageUrl();
-    this.refreshInterval = setInterval(() => this.updateImageUrl(), 5000);
+    this.refreshInterval = setInterval(() => {
+      if (!this.isImageLoading) this.updateImageUrl();      
+    }, 5000);
   }
 
   ngOnDestroy() {
@@ -42,20 +45,22 @@ export class CameraFrameComponent implements OnInit, OnDestroy {
   private updateImageUrl() {
     // Added a timestamp to bypass browser cache for image refresh
     const timestamp = new Date().getTime();
-    const imageUrl = this.cameraService.getCameraFrameUrl(this.inputStream().id);
     
-    // this.isImageLoading.set(true);
+    const imageUrl = this.cameraService.getCameraFrameUrl(this.inputStream().id);
+    this.isImageLoading = true;
+
     this.hasImageError.set(false);
     this.imageUrl.set(`${imageUrl}&t=${timestamp}`);
   }
 
   onImageLoad() {
-    this.isImageLoading.set(false);
+    this.isImageLoading = false;
+    this.isLoadingSpinner.set(false);
     this.hasImageError.set(false);
   }
 
   onImageError() {
-    this.isImageLoading.set(false);
+    this.isLoadingSpinner.set(false);
     this.hasImageError.set(true);
   }
 }
